@@ -38,3 +38,39 @@
     @content;
   }
 }
+
+/*
+  Gets the color by its name and shade.
+
+  @param {string} $color_key - The name of the color.
+  @param {string} $shade - The shade of the color.
+  $param {boolean} $contrast - Whether to return the contrast color.
+
+  @return {string} - The color.
+*/
+@function palette($color_key, $shade: main, $contrast: false) {
+  @if map-has-key($colors, $color_key) == false {
+    @error "Color is not defined in $colors";
+  }
+
+  $color: map-get($colors, $color_key);
+
+  @if $shade != contrast and map-has-key($color, $shade) == false {
+    @error "Shade is not defined in $shades";
+  }
+
+  $color: if($contrast == true, map-get(map-get($color, contrast), $shade), map-get($color, $shade));
+
+  @return $color;
+}
+
+/*
+  Gets the spacing value based on base spacing and the given multiplier.
+
+  @param {number} $multiplier - The multiplier.
+
+  @return {number} - The spacing value.
+*/
+@function spacing($multiplier) {
+  @return $base-spacing-unit * $multiplier;
+}
