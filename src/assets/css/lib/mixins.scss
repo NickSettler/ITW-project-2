@@ -1,0 +1,40 @@
+@import "variables";
+
+/// Uses rules with the width of the screen less than the given breakpoint
+///
+/// @param {string | $width} $breakpoint
+@mixin media-down($breakpoint) {
+  @if map-has-key($widths, $breakpoint) == false {
+    @error "Media breakpoint is not defined in $widths";
+  }
+
+  @media screen and (max-width: map-get($widths, $breakpoint)) {
+    @content;
+  }
+}
+
+/// Uses rules with the width of the screen greater than the given breakpoint
+///
+/// @param {string | $width} $breakpoint
+@mixin media-up($breakpoint) {
+  @if map-has-key($widths, $breakpoint) == false {
+    @error "Media breakpoint is not defined in $widths";
+  }
+
+  @media screen and (min-width: map-get($widths, $breakpoint)) {
+    @content;
+  }
+}
+
+/// Uses rules with the width of the screen between the given breakpoints
+///
+/// @param {string | $width} $breakpoint1
+@mixin media-between($breakpoint1, $breakpoint2) {
+  @if map-has-key($widths, $breakpoint1) == false or map-has-key($widths, $breakpoint2) == false {
+    @error "Media breakpoint is not defined in $widths";
+  }
+
+  @media screen and (min-width: map-get($widths, $breakpoint1)) and (max-width: map-get($widths, $breakpoint2)) {
+    @content;
+  }
+}
