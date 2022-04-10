@@ -2,7 +2,7 @@
   Sizes
 */
 $min-viewport-width: 320px;
-$max-viewport-width: 1920px;
+$max-viewport-width: 1680px;
 $widths: (
   xs: 320px,
   sm: 480px,
@@ -68,32 +68,32 @@ $font-family-primary: "Lato", sans-serif;
 $typography: (
   h1: (
     font-family: $font-family-primary,
-    font-size: clamp(2.75rem, 2.65rem + 0.5vw, 3.25rem),
+    font-size: clamp(2.75rem, 2.6324rem + 0.5882vw, 3.25rem),
     line-height: 1.5,
   ),
   h2: (
     font-family: $font-family-primary,
-    font-size: clamp(2.5rem, 2.45rem + 0.25vw, 2.75rem),
+    font-size: clamp(2.5rem, 2.4412rem + 0.2941vw, 2.75rem),
     line-height: 1.5,
   ),
   h3: (
     font-family: $font-family-primary,
-    font-size: clamp(2rem, 1.9rem + 0.5vw, 2.5rem),
+    font-size: clamp(2rem, 1.8824rem + 0.5882vw, 2.5rem),
     line-height: 1.5,
   ),
   h4: (
     font-family: $font-family-primary,
-    font-size: clamp(1.75rem, 1.7rem + 0.25vw, 2rem),
+    font-size: clamp(1.75rem, 1.6912rem + 0.2941vw, 2rem),
     line-height: 1.5,
   ),
   h5: (
     font-family: $font-family-primary,
-    font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.75rem),
+    font-size: clamp(1.25rem, 1.1324rem + 0.5882vw, 1.75rem),
     line-height: 1.5,
   ),
   h6: (
     font-family: $font-family-primary,
-    font-size: clamp(0.75rem, 0.65rem + 0.5vw, 1.25rem),
+    font-size: clamp(0.75rem, 0.6324rem + 0.5882vw, 1.25rem),
     line-height: 1.5,
   ),
 );
