@@ -89,8 +89,13 @@
   line-height: map.get($font, line-height);
 }
 
-@mixin aspect-ratio($ratio) {
-  padding-bottom: percentage($ratio);
+@mixin aspect-ratio($ratio, $options: ()) {
+  padding-bottom:
+    if(
+      map.has-key($options, max-padding),
+      #{"min("} + percentage($ratio) + #{","} + map.get($options, max-padding) + #{")"},
+      percentage($ratio)
+    );
   position: relative;
   overflow: hidden;
 
