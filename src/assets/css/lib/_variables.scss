@@ -33,6 +33,90 @@ $colors: (
       light: $dark-primary-text,
     )
   ),
+  info: (
+    darker: #236e72,
+    dark: #1d9da9,
+    main: #00b8c8,
+    light: #38c6dc,
+    lighter: #4fd1e7,
+    contrast: (
+      darker: $light-primary-text,
+      dark: $light-primary-text,
+      main: $light-primary-text,
+      light: $dark-primary-text,
+      lighter: $dark-primary-text,
+    )
+  ),
+  success: (
+    darker: #1f733a,
+    dark: #158f3d,
+    main: #00aa3b,
+    light: #24c95b,
+    lighter: #44de79,
+    contrast: (
+      darker: $light-primary-text,
+      dark: $light-primary-text,
+      main: $light-primary-text,
+      light: $dark-primary-text,
+      lighter: $dark-primary-text,
+    )
+  ),
+  warning: (
+    darker: #c06022,
+    dark: #dc7a3b,
+    main: #ffa466,
+    light: #eaa070,
+    lighter: #f5b290,
+    contrast: (
+      darker: $light-primary-text,
+      dark: $light-primary-text,
+      main: $light-primary-text,
+      light: $dark-primary-text,
+      lighter: $dark-primary-text,
+    )
+  ),
+  danger: (
+    darker: #a8252c,
+    dark: #cc3640,
+    main: #ff525d,
+    light: #f8666e,
+    lighter: #fc838a,
+    contrast: (
+      darker: $light-primary-text,
+      dark: $light-primary-text,
+      main: $light-primary-text,
+      light: $dark-primary-text,
+      lighter: $dark-primary-text,
+    )
+  ),
+  extra1: (
+    darker: #6717a4,
+    dark: #7d24c7,
+    main: #a746ff,
+    light: #b168fd,
+    lighter: #b380ff,
+    contrast: (
+      darker: $light-primary-text,
+      dark: $light-primary-text,
+      main: $light-primary-text,
+      light: $dark-primary-text,
+      lighter: $dark-primary-text,
+    )
+  ),
+  extra2: (
+    darker: #4435bd,
+    dark: #5a48d9,
+    main: #7863ff,
+    light: #8776fc,
+    lighter: #9987fd,
+    contrast: (
+      darker: $light-primary-text,
+      dark: $light-primary-text,
+      main: $light-primary-text,
+      light: $dark-primary-text,
+      lighter: $dark-primary-text,
+    )
+  ),
   grey: (
     0: #fafafa,
     50: #f5f5f5,
