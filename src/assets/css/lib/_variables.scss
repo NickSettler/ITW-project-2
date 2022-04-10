@@ -96,4 +96,9 @@ $typography: (
     font-size: clamp(0.75rem, 0.6324rem + 0.5882vw, 1.25rem),
     line-height: 1.5,
   ),
+  p: (
+    font-family: $font-family-primary,
+    font-size: clamp(1rem, 0.9012rem + 0.2941vw, 1.25rem),
+    line-height: 1.5,
+  )
 );
