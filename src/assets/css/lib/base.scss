@@ -4,10 +4,14 @@
 @each $key, $font in $typography {
   #{$key} {
     @include font($key);
+
+    color: palette(grey, 800);
   }
 }
 
 p,
 a {
   @include font(p);
+
+  color: palette(grey, 800);
 }
