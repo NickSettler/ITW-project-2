@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 @import "variables";
 
 /// Uses rules with the width of the screen less than the given breakpoint
@@ -86,4 +87,20 @@
   font-family: map.get($font, font-family);
   font-size: map.get($font, font-size);
   line-height: map.get($font, line-height);
+}
+
+@mixin aspect-ratio($ratio) {
+  padding-bottom: percentage($ratio);
+  position: relative;
+  overflow: hidden;
+
+  & > img,
+  & > iframe,
+  & > video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
