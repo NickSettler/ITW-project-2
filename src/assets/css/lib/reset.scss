@@ -12,6 +12,7 @@
 *:where(:not(iframe, canvas, img, svg, video):not(svg *, symbol *)) {
   all: unset;
   display: revert;
+  box-sizing: border-box;
 }
 
 /* Reapply the pointer cursor for anchor tags */
