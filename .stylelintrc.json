@@ -3,6 +3,7 @@
   "rules": {
     "scss/no-global-function-names": null,
     "number-max-precision": 10,
-    "max-line-length": null
+    "max-line-length": null,
+    "no-descending-specificity": null
   }
 }
