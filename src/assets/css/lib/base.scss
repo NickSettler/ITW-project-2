@@ -1,0 +1,8 @@
+@import "variables";
+@import "mixins";
+
+@each $key, $font in $typography {
+  #{$key} {
+    @include font($key);
+  }
+}

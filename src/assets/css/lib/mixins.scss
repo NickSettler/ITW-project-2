@@ -40,6 +40,17 @@
 }
 
 /*
+  Gets the spacing value based on base spacing and the given multiplier.
+
+  @param {number} $multiplier - The multiplier.
+
+  @return {number} - The spacing value.
+*/
+@function spacing($multiplier) {
+  @return $base-spacing-unit * $multiplier;
+}
+
+/*
   Gets the color by its name and shade.
 
   @param {string} $color_key - The name of the color.
@@ -64,13 +75,14 @@
   @return $color;
 }
 
-/*
-  Gets the spacing value based on base spacing and the given multiplier.
+@mixin font($font-key: base) {
+  @if map-has-key($typography, $font-key) == false {
+    @error "Font is not defined in $typography";
+  }
 
-  @param {number} $multiplier - The multiplier.
+  $font: map-get($typography, $font-key);
 
-  @return {number} - The spacing value.
-*/
-@function spacing($multiplier) {
-  @return $base-spacing-unit * $multiplier;
+  font-family: map-get($font, font-family);
+  font-size: map-get($font, font-size);
+  line-height: map-get($font, line-height);
 }
