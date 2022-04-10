@@ -7,7 +7,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
     },
     mode: mode,
     devServer: {
@@ -39,6 +39,10 @@ module.exports = {
                     "postcss-loader",
                     "sass-loader",
                 ],
+            },
+            {
+                test: /\.html$/i,
+                loader: 'html-loader',
             }
         ]
     },
