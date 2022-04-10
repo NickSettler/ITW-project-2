@@ -34,7 +34,7 @@ header.header {
       }
 
       p:nth-of-type(2) {
-        @include font(h5);
+        @include font(h6);
 
         color: palette(grey, 400);
       }
@@ -162,6 +162,10 @@ header.header {
             width: $size;
             height: $size;
             background: palette(grey, 800);
+          }
+
+          h5 {
+            font-weight: bold;
           }
 
           p {
