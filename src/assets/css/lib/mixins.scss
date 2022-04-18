@@ -145,3 +145,13 @@
     box-shadow: bottom-shadow($depth, $color), top-shadow($depth, $color);
   }
 }
+
+/// Adds container styles to an element.
+/// @param {Map} $options - css options that can be passed to rules instead of the default ones
+@mixin container($options: ()) {
+  width: map.get($options, width) or 100%;
+  height: map.get($options, height) or auto;
+  max-width: map.get($options, max-width) or $container-width;
+  display: map.get($options, display) or flex;
+  position: map.get($options, position) or relative;
+}
