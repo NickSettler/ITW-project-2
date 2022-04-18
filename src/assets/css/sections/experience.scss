@@ -102,12 +102,24 @@ section.experience {
       justify-content: center;
 
       .experience-item {
+        $point-size: 16px;
+
         width: 100%;
         height: auto;
         display: grid;
         grid-template:
           "title position" auto
           "date description" auto / 1fr 1fr;
+
+        &:hover {
+          .experience-item__position {
+            &::before {
+              width: $point-size * 1.5;
+              height: $point-size * 1.5;
+              left: - spacing(8) - $point-size * 0.75;
+            }
+          }
+        }
 
         &:not(:last-child) {
           margin-bottom: spacing(12);
@@ -128,8 +140,6 @@ section.experience {
         .experience-item__position {
           @include font(h4);
 
-          $point-size: 16px;
-
           display: flex;
           align-items: center;
           position: relative;
@@ -147,6 +157,9 @@ section.experience {
             height: $point-size;
             left: - spacing(8) - math.div($point-size, 2);
             z-index: 3;
+            transition-property: width, height, left;
+            transition-duration: 0.15s;
+            transition-timing-function: ease-in-out;
           }
 
           &::after {
