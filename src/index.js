@@ -10,7 +10,7 @@ const translateHeaderTags = (e) => {
 
     const tags = Array.from(document.querySelectorAll(".header-photo-block p"));
 
-    const k = 0.2;
+    const k = 0.4;
 
     tags.map((tag, i) => {
         const box = tag.getBoundingClientRect();
