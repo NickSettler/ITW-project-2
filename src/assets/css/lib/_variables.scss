@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /*
   Sizes
 */
@@ -186,3 +188,5 @@ $typography: (
     line-height: 1.5,
   )
 );
+$text-primary-color: map.get($colors, grey, 800);
+$text-secondary-color: map.get($colors, grey, 400);

@@ -36,7 +36,7 @@ header.header {
       p:nth-of-type(2) {
         @include font(h6);
 
-        color: palette(grey, 400);
+        color: $text-secondary-color;
       }
     }
 
@@ -69,7 +69,7 @@ header.header {
       }
 
       p {
-        color: palette(grey, 400);
+        color: $text-secondary-color;
       }
     }
 
@@ -136,7 +136,7 @@ header.header {
         height: 50vh;
         position: absolute;
         bottom: math.div(spacing($header-padding), -1);
-        background-image: linear-gradient(palette(grey, 400) 50%, transparent 0);
+        background-image: linear-gradient($text-secondary-color 50%, transparent 0);
         background-position: right;
         background-size: 1px 12px;
         background-repeat: repeat-y;
@@ -161,7 +161,7 @@ header.header {
 
             width: $size;
             height: $size;
-            background: palette(grey, 800);
+            background: $text-primary-color;
           }
 
           h5 {
@@ -169,7 +169,7 @@ header.header {
           }
 
           p {
-            color: palette(grey, 400);
+            color: $text-secondary-color;
           }
 
           &:nth-of-type(1) {

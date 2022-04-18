@@ -5,7 +5,7 @@
   #{$key} {
     @include font($key);
 
-    color: palette(grey, 800);
+    color: $text-primary-color;
   }
 }
 
@@ -13,5 +13,5 @@ p,
 a {
   @include font(p);
 
-  color: palette(grey, 800);
+  color: $text-primary-color;
 }

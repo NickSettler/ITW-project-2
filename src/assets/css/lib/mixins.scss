@@ -72,7 +72,7 @@
     @error "Shade is not defined in $shades";
   }
 
-  $color: if($contrast == true, map.get(map.get($color, contrast), $shade), map.get($color, $shade));
+  $color: if($contrast == true, map.get($color, contrast, $shade), map.get($color, $shade));
 
   @return $color;
 }
@@ -136,7 +136,7 @@
 /// @param {Number} $depth - depth level (between 1 and 5)
 /// @requires {function} top-shadow
 /// @requires {function} bottom-shadow
-@mixin shadow($depth, $color: palette(grey, 800)) {
+@mixin shadow($depth, $color: $text-primary-color) {
   @if $depth < 1 {
     box-shadow: none;
   } @else if $depth > 5 {
