@@ -11,7 +11,7 @@ section.experience {
   position: relative;
   flex-direction: column;
   align-items: center;
-  padding: spacing($vertical-padding) 0 spacing($vertical-padding * 1.5);
+  padding: spacing($vertical-padding) 0 spacing($vertical-padding);
 
   &::before {
     content: "";
@@ -28,7 +28,7 @@ section.experience {
   &::after {
     content: "";
     width: 1px;
-    height: spacing($vertical-padding * 1.5);
+    height: spacing($vertical-padding);
     position: absolute;
     bottom: 0;
     background-image: linear-gradient($text-secondary-color 50%, transparent 0);
