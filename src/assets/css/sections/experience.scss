@@ -112,11 +112,11 @@ section.experience {
           "date description" auto / 1fr 1fr;
 
         &:hover {
-          .experience-item__position {
+          .experience-item__title {
             &::before {
               width: $point-size * 1.5;
               height: $point-size * 1.5;
-              left: - spacing(8) - $point-size * 0.75;
+              right: -$point-size * 0.75;
             }
           }
         }
@@ -134,16 +134,10 @@ section.experience {
           @include font(h3);
 
           grid-area: title;
-          font-weight: bold;
-        }
-
-        .experience-item__position {
-          @include font(h4);
-
           display: flex;
           align-items: center;
           position: relative;
-          grid-area: position;
+          font-weight: bold;
 
           &::before,
           &::after {
@@ -155,9 +149,9 @@ section.experience {
           &::before {
             width: $point-size;
             height: $point-size;
-            left: - spacing(8) - math.div($point-size, 2);
+            right: - math.div($point-size, 2);
             z-index: 3;
-            transition-property: width, height, left;
+            transition-property: width, height, right;
             transition-duration: 0.15s;
             transition-timing-function: ease-in-out;
           }
@@ -166,10 +160,18 @@ section.experience {
             width: $point-size * 2;
             height: $point-size * 2;
             background: #fff;
-            left: - spacing(8) - $point-size;
+            right: -$point-size;
             z-index: 2;
             border: 1px dashed $text-secondary-color;
           }
+        }
+
+        .experience-item__position {
+          @include font(h4);
+
+          display: flex;
+          align-items: center;
+          grid-area: position;
         }
 
         .experience-item__date {
@@ -182,15 +184,15 @@ section.experience {
           color: $text-secondary-color;
         }
 
-        &:nth-of-type(3n-2) .experience-item__position::before {
+        &:nth-of-type(3n-2) .experience-item__title::before {
           background: palette(extra1, main);
         }
 
-        &:nth-of-type(3n-1) .experience-item__position::before {
+        &:nth-of-type(3n-1) .experience-item__title::before {
           background: palette(success, main);
         }
 
-        &:nth-of-type(3n) .experience-item__position::before {
+        &:nth-of-type(3n) .experience-item__title::before {
           background: palette(danger, main);
         }
       }
