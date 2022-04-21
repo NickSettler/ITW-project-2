@@ -18,7 +18,7 @@
             <a href="#experience">Work Experience</a>
             <a href="#projects">Projects</a>
             <a href="#">Menu Item 3</a>
-            <a href="#">Menu Item 4</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
     <div class="header-content">
@@ -279,6 +279,36 @@
                 Visit my <a href="https://github.com/NickSettler/">GitHub</a> page to see what I have been working on.
             </p>
         </div>
+    </section>
+    <section class="contact" id="contact">
+        <h2 class="contact-title">Contact</h2>
+        <form class="contact-form" id="contact-form">
+            <div class="contact-image-container">
+                <figure>
+                    <img src="assets/images/photo-placeholder.png" alt="Contact Me">
+                </figure>
+            </div>
+            <div class="contact-form">
+                <div class="contact-form__field">
+                    <input type="text" name="name" id="name" placeholder="name" pattern="[a-zA-Z\s]+" required
+                           autocomplete="name">
+                    <label for="name">Name</label>
+                </div>
+                <div class="contact-form__field">
+                    <input type="email" name="email" id="email" placeholder="email" required autocomplete="email">
+                    <label for="email">E-mail</label>
+                </div>
+                <div class="contact-form__field">
+                    <textarea rows="5" name="message" id="message" required placeholder="message"></textarea>
+                    <label for="message">Message</label>
+                </div>
+                <button type="submit">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <i class="fa-duotone fa-spinner-third"></i>
+                    Send
+                </button>
+            </div>
+        </form>
     </section>
 </main>
 </body>

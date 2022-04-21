@@ -1,0 +1,249 @@
+@use "sass:math";
+@import "../lib/variables";
+@import "../lib/mixins";
+
+section.contact {
+  $vertical-padding: 20;
+  $section-background: $light-primary-text;
+
+  @include container;
+
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  padding-top: spacing($vertical-padding);
+  padding-bottom: spacing($vertical-padding);
+
+  &::before {
+    content: "";
+    width: 1px;
+    height: spacing($vertical-padding);
+    position: absolute;
+    top: 0;
+    left: - spacing(24);
+    background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+    background-position: left;
+    background-size: 1px 12px;
+    background-repeat: repeat-y;
+  }
+
+  &::after {
+    content: "";
+    width: 1px;
+    height: spacing($vertical-padding);
+    position: absolute;
+    bottom: 0;
+    right: - spacing(24);
+    background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+    background-position: left;
+    background-size: 1px 12px;
+    background-repeat: repeat-y;
+  }
+
+  .contact-title {
+    @include container;
+
+    justify-content: center;
+    padding: spacing(2) 0;
+    margin-bottom: spacing(16);
+    font-weight: bold;
+
+    &::before {
+      content: "";
+      width: #{calc(100% + spacing(48))};
+      height: 1px;
+      position: absolute;
+      top: 0;
+      left: - spacing(24);
+      background-image: linear-gradient(to left, $text-secondary-color 50%, transparent 0);
+      background-position: top;
+      background-size: 12px 1px;
+      background-repeat: repeat-x;
+    }
+
+    &::after {
+      content: "";
+      width: 1px;
+      height: #{calc(100% + spacing(16))};
+      position: absolute;
+      top: 0;
+      right: - spacing(24);
+      background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+      background-position: left;
+      background-size: 1px 12px;
+      background-repeat: repeat-y;
+    }
+  }
+
+  form.contact-form {
+    @include container((
+      display: grid
+    ));
+
+    grid-template: "image form" auto / 1fr 1fr;
+    grid-column-gap: spacing(4);
+
+    &::after {
+      content: "";
+      width: 1px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: - spacing(24);
+      background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+      background-position: left;
+      background-size: 1px 12px;
+      background-repeat: repeat-y;
+    }
+
+    .contact-image-container {
+      @include container;
+
+      grid-area: image;
+
+      figure {
+        @include aspect-ratio(math.div(9, 16));
+
+        width: 100%;
+      }
+    }
+
+    .contact-form {
+      @include container((
+        display: grid
+      ));
+
+      grid-area: form;
+      grid-template:
+        "name email" auto
+        "message message" auto
+        "submit submit" 1fr / 1fr 1fr;
+      align-content: flex-start;
+      grid-gap: spacing(2);
+
+      .contact-form__field {
+        @include container;
+
+        padding-top: spacing(6);
+
+        &:nth-of-type(1) {
+          grid-area: name;
+        }
+
+        &:nth-of-type(2) {
+          grid-area: email;
+        }
+
+        &:nth-of-type(3) {
+          grid-area: message;
+        }
+
+        label {
+          @include font(subtitle, (line-height));
+
+          background: $section-background;
+          position: absolute;
+          left: spacing(1);
+          top: spacing(2);
+          padding: spacing(0.5) spacing(1);
+          transition-property: top, left;
+          transition-duration: 0.1s;
+          transition-timing-function: ease-in-out;
+        }
+
+        input,
+        textarea {
+          @include font(subtitle);
+
+          appearance: none;
+          outline: none;
+          -webkit-tap-highlight-color: transparent;
+          width: 100%;
+          border: 1px solid $text-secondary-color;
+          border-radius: spacing(2);
+          padding: spacing(2) spacing(2);
+          transition-property: border-color;
+          transition-duration: 0.1s;
+          transition-timing-function: ease-in-out;
+
+          &:focus {
+            border-color: palette(success, darker);
+
+            & ~ label {
+              top: 0;
+              left: 0;
+              color: palette(success, darker);
+            }
+          }
+
+          &::placeholder {
+            color: $section-background;
+            font-size: 0;
+          }
+
+          &:not(:placeholder-shown),
+          &:not(:empty) {
+            & ~ label {
+              top: 0;
+              left: 0;
+            }
+
+            &:invalid {
+              border-color: palette(danger, darker);
+
+              & ~ label {
+                color: palette(danger, darker);
+              }
+            }
+
+            &:valid {
+              border-color: palette(success, darker);
+
+              & ~ label {
+                color: palette(success, darker);
+              }
+            }
+          }
+
+          &:-webkit-autofill {
+            -webkit-text-fill-color: $text-primary-color;
+            box-shadow: 0 0 0 1000px $section-background inset;
+          }
+        }
+      }
+
+      button[type="submit"] {
+        @include container;
+        @include font(h6);
+
+        appearance: none;
+        outline: none;
+        background: transparent;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        grid-area: submit;
+        justify-content: center;
+        align-items: baseline;
+        align-self: flex-end;
+        padding: spacing(2);
+        border: 1px solid $text-secondary-color;
+        border-radius: spacing(2);
+        text-align: center;
+        transition-property: background-color, border-color, color;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+
+        i {
+          margin-right: spacing(2);
+          font-size: 1em;
+        }
+
+        &:hover {
+          background: rgba(palette(primary, darker), 0.32);
+          border-color: palette(primary, darker);
+          color: palette(success, darker);
+        }
+      }
+    }
+  }
+}

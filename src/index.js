@@ -27,6 +27,10 @@ const translateHeaderTags = (e) => {
     })
 }
 
+/**
+ * Move cards background depending on mouse position
+ * @param {MouseEvent} e
+ */
 const translateProjectCardsBackground = (e) => {
     const {clientX: x, clientY: y} = e;
     const {innerWidth: width, innerHeight: height} = window;
@@ -116,3 +120,27 @@ for (const arrowButton of arrowButtons) {
         })
     })
 }
+
+/**
+ * Handle contact form submission
+ * @param {SubmitEvent} e
+ */
+const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.target);
+    fetch("https://formspree.io/f/xvolwepo", {
+        method: "POST",
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+
+        })
+}
+
+const contactForm = document.getElementById("contact-form");
+contactForm.addEventListener("submit", handleFormSubmit);
