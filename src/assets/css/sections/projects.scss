@@ -1,0 +1,377 @@
+@use "sass:math";
+@import "../lib/variables";
+@import "../lib/mixins";
+
+section#projects {
+  $vertical-padding: 20;
+
+  @include container((
+    max-width: 100%
+  ));
+
+  flex-direction: column;
+  align-items: center;
+  padding: spacing($vertical-padding) 0;
+  background: palette(primary);
+
+  &::before {
+    content: "";
+    width: 1px;
+    height: spacing($vertical-padding);
+    position: absolute;
+    top: 0;
+    background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+    background-position: left;
+    background-size: 1px 12px;
+    background-repeat: repeat-y;
+  }
+
+  .projects-title {
+    $margin-bottom: 16;
+
+    @include container;
+
+    justify-content: center;
+    padding: spacing(2) spacing(24);
+    margin-bottom: spacing($margin-bottom);
+    background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+    background-position: left;
+    background-size: 1px 12px;
+    background-repeat: repeat-y;
+    font-weight: bold;
+    box-sizing: content-box;
+
+    &::before {
+      content: "";
+      width: 50%;
+      height: 1px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to left, $text-secondary-color 50%, transparent 0);
+      background-position: top;
+      background-size: 12px 1px;
+      background-repeat: repeat-x;
+    }
+
+    &::after {
+      content: "";
+      width: 1px;
+      height: spacing($margin-bottom);
+      position: absolute;
+      bottom: - spacing($margin-bottom);
+      left: 0;
+      background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+      background-position: left;
+      background-size: 1px 12px;
+      background-repeat: repeat-y;
+    }
+  }
+
+  .projects-content {
+    @include container;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 spacing(24);
+    box-sizing: content-box;
+    background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+    background-position: left;
+    background-size: 1px 12px;
+    background-repeat: repeat-y;
+
+    &::after {
+      content: "";
+      width: 1px;
+      height: spacing($vertical-padding);
+      position: absolute;
+      bottom: - spacing($vertical-padding);
+      left: 0;
+      background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+      background-position: left;
+      background-size: 1px 12px;
+      background-repeat: repeat-y;
+    }
+
+    .projects-filter {
+      @include container;
+
+      margin-bottom: spacing(12);
+
+      .projects-filter-button {
+        $active-color: primary;
+        $active-shade: dark;
+
+        @include container((
+          width: auto,
+          display: inline-flex
+        ));
+        @include font(p);
+
+        padding: spacing(1) spacing(4);
+        appearance: none;
+        outline: none;
+        background: none;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 1000px;
+        border: 1px solid $text-secondary-color;
+        color: $text-primary-color;
+        transition-property: border-color, padding-left, background-color;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+
+        &:not(:last-child) {
+          margin-right: spacing(3);
+        }
+
+        &:hover {
+          border-color: $text-primary-color;
+
+          &.active i:nth-of-type(2) {
+            opacity: 1;
+          }
+        }
+
+        &.active {
+          padding-left: #{calc(1em + spacing(1) * 3 + spacing(2))};
+          border-color: palette($active-color, $active-shade);
+          background: rgba(palette($active-color, $active-shade), 50%);
+
+          & > i {
+            padding: spacing(1);
+            transform: scale(1);
+            background-color: palette($active-color, $active-shade);
+            color: palette($active-color, $active-shade, true);
+            opacity: 1;
+
+            &:nth-of-type(2) {
+              opacity: 0;
+            }
+          }
+
+          &:hover i:nth-of-type(2) {
+            opacity: 1;
+          }
+        }
+
+        & > i {
+          width: #{calc(1em + spacing(1) * 2)};
+          height: #{calc(1em + spacing(1) * 2)};
+          position: absolute;
+          left: spacing(2);
+          font-size: 1em;
+          line-height: 1;
+          margin-right: 0;
+          padding: 0;
+          border-radius: 1000px;
+          background-color: $text-primary-color;
+          color: $light-primary-text;
+          opacity: 0;
+          text-align: center;
+          transition-property: transform, color, background-color, opacity;
+          transition-duration: 0.15s;
+          transition-timing-function: ease-in-out;
+          transform: scale(0);
+          transform-origin: 50% 50%;
+          overflow: hidden;
+        }
+      }
+    }
+
+    .projects-cards {
+      @include container;
+
+      align-items: center;
+      margin-bottom: spacing(4);
+
+      .projects-cards__wrapper {
+        @include container((
+          max-width: none
+        ));
+
+        justify-content: flex-start;
+        overflow-x: auto;
+        overscroll-behavior: contain;
+        scroll-snap-type: x mandatory;
+      }
+
+      .projects-cards__placeholder {
+        @include container((
+          width: 30%,
+        ));
+
+        min-width: 30%;
+        margin-left: -30%;
+
+        & > figure {
+          @include aspect-ratio(math.div(1, 1));
+        }
+      }
+
+      .project-card {
+        @include container((
+          width: 30%
+        ));
+        @include shadow(2, $text-secondary-color);
+
+        min-width: 30%;
+        flex-shrink: 0;
+        border-radius: spacing(2);
+        overflow: hidden;
+        scroll-snap-align: start;
+        transition-property: box-shadow, width, opacity, margin-right, min-width;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+
+        &:hover {
+          @include shadow(4, $text-secondary-color);
+
+          .project-backdrop {
+            backdrop-filter: contrast(80%) blur(6px);
+          }
+
+          .project-link {
+            background: $github-color;
+            color: $light-primary-text;
+          }
+        }
+
+        &:not(:last-child) {
+          margin-right: spacing(4);
+        }
+
+        &.inactive {
+          width: 0;
+          min-width: 0;
+          opacity: 0;
+          margin-right: 0;
+        }
+
+        & > figure {
+          @include aspect-ratio(math.div(1, 1));
+
+          width: 100%;
+
+          & > div {
+            display: grid;
+            grid-template:
+              "title spacer github" auto
+              "subtitle subtitle subtitle" 1fr / 1fr;
+            grid-row-gap: spacing(3);
+            align-content: flex-start;
+            padding: spacing(5);
+
+            *::selection {
+              background-color: invert(palette(info), 5%);
+            }
+
+            & > *:not(img) {
+              z-index: 4;
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 2;
+              object-fit: cover;
+              object-position: center;
+              transform: scale(1.1);
+            }
+
+            .project-backdrop {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              background: rgba(palette(info), 0.4);
+              z-index: 3;
+              backdrop-filter: none;
+              border-radius: spacing(2);
+              transition-property: backdrop-filter;
+              transition-duration: 0.3s;
+              transition-timing-function: ease-in-out;
+            }
+
+            .project-title {
+              @include font(h6);
+
+              grid-area: title;
+              font-weight: bold;
+              color: $light-primary-text;
+            }
+
+            .project-subtitle {
+              grid-area: subtitle;
+              color: $light-primary-text;
+            }
+
+            .project-link {
+              grid-area: github;
+              border-radius: spacing(1);
+              padding: spacing(1) spacing(2);
+              margin-right: - spacing(2);
+              margin-top: - spacing(1);
+              font-weight: 300;
+              transition-property: backdrop-filter, color, background-color;
+              transition-duration: 0.3s;
+              transition-timing-function: ease-in-out;
+            }
+          }
+        }
+      }
+
+      .projects-cards__arrow {
+        $size: 32px;
+
+        appearance: none;
+        outline: none;
+        background: none;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        width: $size;
+        height: $size;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: spacing(2);
+        border: 1px solid $text-secondary-color;
+        z-index: 2;
+        transition-property: background-color, border-color;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+
+        &.arrow_left {
+          left: -$size - spacing(4);
+        }
+
+        &.arrow_right {
+          right: -$size - spacing(4);
+        }
+
+        &:hover {
+          background-color: rgba(palette(primary, darker), 0.2);
+          border-color: palette(success, darker);
+          color: palette(success, darker);
+        }
+      }
+    }
+
+    .projects-text {
+      @include container((
+        display: block,
+      ));
+      @include font(subtitle);
+
+      color: $text-secondary-color;
+
+      a {
+        @include font(subtitle);
+
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -2,10 +2,12 @@
 @import "mixins";
 
 @each $key, $font in $typography {
-  #{$key} {
-    @include font($key);
+  @if $key != subtitle {
+    #{$key} {
+      @include font($key);
 
-    color: $text-primary-color;
+      color: $text-primary-color;
+    }
   }
 }
 

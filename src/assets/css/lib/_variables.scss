@@ -23,6 +23,7 @@ $dark-primary-text: rgb(0 0 0 / 87%);
 $dark-disabled-text: rgb(0 0 0 / 38%);
 $light-primary-text: white;
 $light-disabled-text: rgb(255 255 255 / 50%);
+$github-color: #171515;
 $colors: (
   primary: (
     darker: #72a172,
@@ -186,6 +187,11 @@ $typography: (
   p: (
     font-family: $font-family-primary,
     font-size: clamp(1rem, 0.9012rem + 0.2941vw, 1.25rem),
+    line-height: 1.5,
+  ),
+  subtitle: (
+    font-family: $font-family-primary,
+    font-size: clamp(0.75rem, 0.6912rem + 0.2941vw, 1rem),
     line-height: 1.5,
   )
 );
