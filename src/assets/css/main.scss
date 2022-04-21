@@ -7,6 +7,10 @@
 @import "sections/experience";
 @import "sections/projects";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
 }
