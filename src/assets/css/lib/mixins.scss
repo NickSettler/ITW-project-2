@@ -1,3 +1,4 @@
+@use "sass:list";
 @use "sass:map";
 @use "sass:math";
 @import "variables";
@@ -77,16 +78,24 @@
   @return $color;
 }
 
-@mixin font($font-key: base) {
+@mixin font($font-key: base, $exclude: ()) {
   @if map.has-key($typography, $font-key) == false {
     @error "Font is not defined in $typography";
   }
 
   $font: map.get($typography, $font-key);
 
-  font-family: map.get($font, font-family);
-  font-size: map.get($font, font-size);
-  line-height: map.get($font, line-height);
+  @if not list.index($exclude, font-family) {
+    font-family: map.get($font, font-family);
+  }
+
+  @if not list.index($exclude, font-size) {
+    font-size: map.get($font, font-size);
+  }
+
+  @if not list.index($exclude, line-height) {
+    line-height: map.get($font, line-height);
+  }
 }
 
 @mixin aspect-ratio($ratio, $options: ()) {
