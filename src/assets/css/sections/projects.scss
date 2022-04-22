@@ -403,11 +403,11 @@ section#projects {
 
         @include media-down(md) {
           &.arrow_left {
-            left: -#{calc($size / 2 + spacing($mobile-horizontal-spacing) / 4)};
+            left: -#{calc(#{$size} / 2 + spacing($mobile-horizontal-spacing) / 4)};
           }
 
           &.arrow_right {
-            right: -#{calc($size / 2 + spacing($mobile-horizontal-spacing) / 4)};
+            right: -#{calc(#{$size} / 2 + spacing($mobile-horizontal-spacing) / 4)};
           }
         }
 
