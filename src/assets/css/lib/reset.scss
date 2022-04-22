@@ -31,6 +31,8 @@ menu {
 /* For images to not be able to exceed their container */
 img {
   max-width: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 /* removes spacing between cells in tables */
