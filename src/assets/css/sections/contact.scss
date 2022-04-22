@@ -109,7 +109,7 @@ section.contact {
     ));
 
     grid-template: "image form" auto / 1fr 1fr;
-    grid-column-gap: spacing(4);
+    grid-column-gap: spacing(8);
 
     @include media-down(md) {
       grid-template: "image" auto "form" auto / 1fr;
@@ -159,10 +159,13 @@ section.contact {
         "submit submit" 1fr
         "info info" auto / 1fr 1fr;
       align-content: flex-start;
-      grid-gap: spacing(2);
+      grid-column-gap: spacing(6);
+      margin-top: - spacing(6);
 
       @include media-down(md) {
-        grid-template: "name" auto "email" auto "message" auto "submit" auto / 1fr;
+        grid-template: "name" auto "email" auto "message" auto "submit" auto "info" auto / 1fr;
+        grid-row-gap: spacing(2);
+        margin-top: 0;
       }
 
       .contact-form__field {
