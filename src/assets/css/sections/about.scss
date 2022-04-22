@@ -92,7 +92,7 @@ section#about {
       display: grid
     ));
 
-    grid-template: "image info" auto / 1fr 1fr;
+    grid-template: "info image" auto / 1fr 1fr;
     grid-column-gap: spacing(8);
     align-items: flex-start;
 
