@@ -1,0 +1,214 @@
+@use "sass:math";
+@import "../lib/variables";
+@import "../lib/mixins";
+
+section#about {
+  $vertical-padding: 20;
+  $section-background: $light-primary-text;
+
+  @include container;
+
+  align-self: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: spacing($vertical-padding);
+  padding-bottom: spacing($vertical-padding);
+  background-color: $section-background;
+
+  @include media-down(md) {
+    padding-left: spacing($mobile-horizontal-spacing);
+    padding-right: spacing($mobile-horizontal-spacing);
+  }
+
+  &::before {
+    content: "";
+    width: 1px;
+    height: spacing($vertical-padding);
+    position: absolute;
+    top: 0;
+    left: - spacing(24);
+    background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+    background-position: left;
+    background-size: 1px 12px;
+    background-repeat: repeat-y;
+
+    @include media-down(md) {
+      left: #{calc(spacing($mobile-horizontal-spacing) / 2)};
+    }
+  }
+
+  &::after {
+    content: "";
+    width: 1px;
+    height: spacing($vertical-padding);
+    position: absolute;
+    bottom: 0;
+    left: - spacing(24);
+    background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+    background-position: left;
+    background-size: 1px 12px;
+    background-repeat: repeat-y;
+
+    @include media-down(md) {
+      left: #{calc(spacing($mobile-horizontal-spacing) / 2)};
+    }
+  }
+
+  .about-title {
+    $margin-bottom: 16;
+
+    @include container;
+
+    justify-content: center;
+    text-align: center;
+    padding: spacing(2) 0;
+    margin-bottom: spacing($margin-bottom);
+    font-weight: bold;
+
+    @include media-down(md) {
+      margin-bottom: spacing(8);
+    }
+
+    &::before {
+      content: "";
+      width: 1px;
+      height: #{calc(100% + spacing($margin-bottom))};
+      position: absolute;
+      top: 0;
+      left: - spacing(24);
+      background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+      background-position: left;
+      background-size: 1px 12px;
+      background-repeat: repeat-y;
+
+      @include media-down(md) {
+        left: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+      }
+    }
+  }
+
+  .about-content {
+    @include container((
+      display: grid
+    ));
+
+    grid-template: "image info" auto / 1fr 1fr;
+    grid-column-gap: spacing(8);
+    align-items: flex-start;
+
+    @include media-down(md) {
+      grid-template: "image" auto "info" auto / 1fr;
+      grid-row-gap: spacing(6);
+    }
+
+    &::before {
+      content: "";
+      width: 1px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: - spacing(24);
+      background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+      background-position: left;
+      background-size: 1px 12px;
+      background-repeat: repeat-y;
+
+      @include media-down(md) {
+        left: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+      }
+    }
+
+    .about-image {
+      grid-area: image;
+      border-radius: spacing(2);
+      overflow: hidden;
+
+      figure {
+        @include aspect-ratio(math.div(9, 16));
+
+        height: 100%;
+
+        img {
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+
+    .about-info {
+      @include container((
+        display: grid
+      ));
+
+      grid-area: info;
+      grid-template: "pretitle" auto "title" auto "categories" auto "text" auto / 1fr;
+      grid-row-gap: spacing(2);
+      align-content: flex-start;
+
+      .about-info__pretitle {
+        @include font(subtitle);
+
+        grid-area: pretitle;
+        color: $text-secondary-color;
+      }
+
+      .about-info__title {
+        @include font(h3);
+
+        grid-area: title;
+        font-weight: bold;
+      }
+
+      .about-info__categories {
+        @include container;
+
+        justify-content: flex-start;
+        margin-top: spacing(4);
+        margin-bottom: spacing(2);
+
+        .about-info__category {
+          @include font(p);
+
+          appearance: none;
+          outline: none;
+          background: none;
+          border: none;
+          -webkit-tap-highlight-color: transparent;
+          cursor: pointer;
+          display: inline-flex;
+          border-bottom: 1px solid transparent;
+          transition-property: border-bottom-color, font-weight;
+          transition-duration: 0.15s;
+          transition-timing-function: ease-in-out;
+
+          &:not(:last-child) {
+            margin-right: spacing(16);
+          }
+
+          &.active {
+            border-bottom-color: $text-primary-color;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .about-info__text {
+        grid-area: text;
+
+        p {
+          position: absolute;
+          visibility: hidden;
+          opacity: 0;
+          transition-property: visibility, opacity;
+          transition-duration: 0.15s;
+          transition-timing-function: ease-in-out;
+
+          &.active {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

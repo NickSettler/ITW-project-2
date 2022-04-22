@@ -155,6 +155,36 @@ for (const arrowButton of arrowButtons) {
     })
 }
 
+/**
+ * Handles category click in about section
+ * @param {MouseEvent} e
+ * @param {number} i
+ */
+const handleCategoryClick = (e, i) => {
+    Array.from(document.getElementsByClassName("about-info__category"))
+        .map((el, index) => index === i ? el.classList.add("active") : el.classList.remove("active"));
+
+    Array.from(document.querySelectorAll(".about-info__text p"))
+        .map((el, index) => index === i ? el.classList.add("active") : el.classList.remove("active"));
+}
+
+const aboutCategories = Array.from(document.getElementsByClassName("about-info__category"));
+aboutCategories.forEach((el, i) => {
+    el.addEventListener("click", (e) => handleCategoryClick(e, i));
+})
+
+const setAboutTextHeight = () => {
+    const aboutTextWrapper = document.getElementsByClassName("about-info__text")[0];
+    const maxHeight = Array.from(document.querySelectorAll(".about-info__text p"))
+        .map(el => el.getBoundingClientRect().height)
+        .reduce((acc, height) => Math.max(acc, height), 0);
+
+    aboutTextWrapper.style.height = `${maxHeight}px`;
+}
+
+setAboutTextHeight();
+window.addEventListener("resize", setAboutTextHeight);
+
 let formLoading = false;
 
 /**
@@ -164,7 +194,7 @@ let formLoading = false;
 const setFormError = (error) => {
     const errorMessage = document.getElementsByClassName("contact-form__error")[0];
 
-    if(error)
+    if (error)
         errorMessage.classList.add("visible");
     else
         errorMessage.classList.remove("visible");
@@ -213,7 +243,7 @@ const handleFormSubmit = (e) => {
     })
         .then(response => response.json())
         .then(data => {
-            if(!data.ok) throw new Error();
+            if (!data.ok) throw new Error();
             setFormLoading(false);
         })
         .catch(() => {
