@@ -100,6 +100,8 @@ section.contact {
       @include container;
 
       grid-area: image;
+      border-radius: spacing(2);
+      overflow: hidden;
 
       figure {
         @include aspect-ratio(math.div(9, 16));
