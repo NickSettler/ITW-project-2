@@ -5,15 +5,18 @@
 
 section.contact {
   $vertical-padding: 20;
-  $section-background: $light-primary-text;
+  $section-background: palette(primary);
 
-  @include container;
+  @include container((
+    max-width: none
+  ));
 
   flex-direction: column;
   align-self: center;
   justify-content: center;
   padding-top: spacing($vertical-padding);
   padding-bottom: spacing($vertical-padding);
+  background: $section-background;
 
   @include media-down(md) {
     padding-left: spacing($mobile-horizontal-spacing);
@@ -26,7 +29,7 @@ section.contact {
     height: spacing($vertical-padding);
     position: absolute;
     top: 0;
-    left: - spacing(24);
+    left: #{calc((100vw - #{$container-width}) / 2 - spacing(24))};
     background-image: linear-gradient($text-secondary-color 50%, transparent 0);
     background-position: left;
     background-size: 1px 12px;
@@ -61,6 +64,7 @@ section.contact {
     padding: spacing(2) 0;
     margin-bottom: spacing(16);
     font-weight: bold;
+    align-self: center;
 
     @include media-down(md) {
       margin-bottom: spacing(8);
@@ -108,6 +112,7 @@ section.contact {
       display: grid
     ));
 
+    align-self: center;
     grid-template: "image form" auto / 1fr 1fr;
     grid-column-gap: spacing(8);
 
