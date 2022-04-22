@@ -13,6 +13,11 @@ section.experience {
   align-items: center;
   padding: spacing($vertical-padding) 0 spacing($vertical-padding);
 
+  @include media-down(md) {
+    padding-left: spacing($mobile-horizontal-spacing);
+    padding-right: spacing($mobile-horizontal-spacing);
+  }
+
   &::before {
     content: "";
     width: 1px;
@@ -35,6 +40,10 @@ section.experience {
     background-position: right;
     background-size: 1px 12px;
     background-repeat: repeat-y;
+
+    @include media-down(md) {
+      height: #{calc(spacing($vertical-padding) / 2)};
+    }
   }
 
   .experience-title {
@@ -47,6 +56,10 @@ section.experience {
     background-repeat: repeat-y;
     text-align: center;
     font-weight: bold;
+
+    @include media-down(md) {
+      padding: spacing(2) spacing(0);
+    }
 
     &::before,
     &::after {
@@ -67,16 +80,26 @@ section.experience {
 
     &::after {
       bottom: 0;
+
+      @include media-down(md) {
+        width: #{calc(100% + spacing($mobile-horizontal-spacing) / 2)};
+      }
     }
   }
 
-  .experience-line {
+  & > .experience-line {
     width: 1px;
     height: spacing(16);
     background-image: linear-gradient($text-secondary-color 50%, transparent 0);
     background-position: right;
     background-size: 1px 12px;
     background-repeat: repeat-y;
+
+    @include media-down(md) {
+      align-self: flex-start;
+      height: spacing(8);
+      margin-left: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+    }
   }
 
   .experience-content {
@@ -93,6 +116,10 @@ section.experience {
       background-position: right;
       background-size: 1px 12px;
       background-repeat: repeat-y;
+
+      @include media-down(md) {
+        left: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+      }
     }
 
     .experience-block {
@@ -100,6 +127,42 @@ section.experience {
 
       flex-direction: column;
       justify-content: center;
+
+      &::before {
+        content: "";
+        width: 1px;
+        height: #{calc(spacing($vertical-padding) / 2)};
+        position: absolute;
+        display: none;
+        bottom: -#{calc(spacing($vertical-padding) / 2)};
+        left: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+        background-image: linear-gradient($text-secondary-color 50%, transparent 0);
+        background-position: right;
+        background-size: 1px 12px;
+        background-repeat: repeat-y;
+
+        @include media-down(md) {
+          display: block;
+        }
+      }
+
+      &::after {
+        content: "";
+        width: #{calc(50% + spacing($mobile-horizontal-spacing) / 2)};
+        height: 1px;
+        position: absolute;
+        display: none;
+        bottom: -#{calc(spacing($vertical-padding) / 2)};
+        left: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+        background-image: linear-gradient(to left, $text-secondary-color 50%, transparent 0);
+        background-position: top;
+        background-size: 12px 1px;
+        background-repeat: repeat-x;
+
+        @include media-down(md) {
+          display: block;
+        }
+      }
 
       .experience-item {
         $point-size: 16px;
@@ -111,12 +174,25 @@ section.experience {
           "title position" auto
           "date description" auto / 1fr 1fr;
 
+        @include media-down(md) {
+          grid-template:
+            "title" auto
+            "date" auto
+            "position" auto
+            "description" auto / 1fr;
+        }
+
         &:hover {
           .experience-item__title {
             &::before {
               width: $point-size * 1.5;
               height: $point-size * 1.5;
               right: -$point-size * 0.75;
+
+              @include media-down(md) {
+                width: $point-size;
+                height: $point-size;
+              }
             }
           }
         }
@@ -128,6 +204,10 @@ section.experience {
         .experience-item__position,
         .experience-item__description {
           margin-left: spacing(8);
+
+          @include media-down(md) {
+            margin-left: 0;
+          }
         }
 
         .experience-item__title {
@@ -151,9 +231,13 @@ section.experience {
             height: $point-size;
             right: - math.div($point-size, 2);
             z-index: 3;
-            transition-property: width, height, right;
+            transition-property: width, height, right, left;
             transition-duration: 0.15s;
             transition-timing-function: ease-in-out;
+
+            @include media-down(md) {
+              left: - spacing(4) - math.div($point-size, 2);
+            }
           }
 
           &::after {
@@ -163,6 +247,12 @@ section.experience {
             right: -$point-size;
             z-index: 2;
             border: 1px dashed $text-secondary-color;
+
+            @include media-down(md) {
+              width: $point-size * 1.5;
+              height: $point-size * 1.5;
+              left: - spacing(4) - math.div($point-size, 1.3333);
+            }
           }
         }
 

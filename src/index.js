@@ -1,5 +1,39 @@
 import "./assets/css/main.scss";
 
+const headerMenuButton = document.getElementsByClassName("header-menu-button")[0];
+headerMenuButton.addEventListener("click", () => {
+    const menu = document.getElementsByClassName("header-menu-list")[0];
+    menu.classList.toggle("active");
+});
+
+const handleMenuItemClick = (e) => {
+    e.preventDefault();
+
+    try {
+        const menuItem = e.composedPath().find(el => el.tagName === "A");
+        const link = menuItem.getAttribute("href");
+
+        const section = document.getElementById(link.substring(1));
+        const sectionTop = section.offsetTop;
+
+        const menu = document.getElementsByClassName("header-menu")[0];
+        const menuHeight = menu.offsetHeight;
+
+        window.scrollTo({
+            top: sectionTop - menuHeight,
+            behavior: "smooth"
+        });
+    } finally {
+        const menu = document.getElementsByClassName("header-menu-list")[0];
+        menu.classList.remove("active");
+    }
+}
+
+const menuItems = document.querySelectorAll(".header-menu-list a");
+for (const menuItem of menuItems) {
+    menuItem.addEventListener("click", handleMenuItemClick);
+}
+
 /**
  * Adds header tags transform depending on mouse position
  * @param {MouseEvent} e - mouse move event upon document
@@ -121,6 +155,42 @@ for (const arrowButton of arrowButtons) {
     })
 }
 
+let formLoading = false;
+
+/**
+ *
+ * @param {boolean | string} error - true if error, false if success, string if error message
+ */
+const setFormError = (error) => {
+    const errorMessage = document.getElementsByClassName("contact-form__error")[0];
+
+    if(error)
+        errorMessage.classList.add("visible");
+    else
+        errorMessage.classList.remove("visible");
+
+    if (error)
+        errorMessage.textContent = error;
+}
+
+/**
+ * Set form state (default/loading)
+ * @param {boolean} loading is form loading or not
+ */
+const setFormLoading = (loading) => {
+    formLoading = loading;
+
+    const form = document.getElementById("contact-form");
+    form.querySelectorAll(".contact-form__field, input, textarea, button").forEach(el => {
+        if (loading)
+            el.classList.add("disabled");
+        else
+            el.classList.remove("disabled");
+
+        if (el.tagName === "BUTTON" || el.tagName === "INPUT" || el.tagName === "TEXTAREA") el.disabled = loading;
+    });
+}
+
 /**
  * Handle contact form submission
  * @param {SubmitEvent} e
@@ -128,7 +198,12 @@ for (const arrowButton of arrowButtons) {
 const handleFormSubmit = (e) => {
     e.preventDefault();
 
+    if (formLoading) return;
+
     const data = new FormData(e.target);
+
+    setFormLoading(true);
+
     fetch("https://formspree.io/f/xvolwepo", {
         method: "POST",
         body: data,
@@ -138,7 +213,12 @@ const handleFormSubmit = (e) => {
     })
         .then(response => response.json())
         .then(data => {
-
+            if(!data.ok) throw new Error();
+            setFormLoading(false);
+        })
+        .catch(() => {
+            setFormError("Something went wrong. Please try again later.");
+            setFormLoading(false);
         })
 }
 

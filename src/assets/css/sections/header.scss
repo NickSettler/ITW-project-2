@@ -4,6 +4,7 @@
 @import "../lib/mixins";
 
 $header-padding: 16;
+$header-padding-small: 8;
 
 header.header {
   width: 100%;
@@ -14,11 +15,31 @@ header.header {
   background: palette(primary);
   overflow: hidden;
 
+  @include media-down(md) {
+    height: auto;
+    padding: spacing(24) spacing($header-padding-small) spacing($header-padding-small);
+  }
+
   .header-menu {
     width: 100%;
     display: grid;
     grid-template: "title menu spacer" auto / 1fr 2fr 1fr;
     margin-bottom: spacing(20);
+    background: palette(primary);
+    z-index: 200;
+
+    @include media-down(md) {
+      grid-template:
+        "title" auto
+        "menu" auto / 1fr;
+      grid-row-gap: spacing(4);
+      align-items: center;
+      margin-bottom: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: spacing(math.div($header-padding-small, 2)) spacing($header-padding-small);
+    }
 
     .header-title {
       grid-area: title;
@@ -44,9 +65,82 @@ header.header {
       display: flex;
       justify-content: center;
       align-items: baseline;
+      background: palette(primary);
 
-      a:not(:last-of-type) {
-        margin-right: spacing(8);
+      @include media-down(md) {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        align-items: center;
+        flex-direction: column;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+
+        &:not(.active) {
+          visibility: hidden;
+        }
+      }
+
+      &.active + .header-menu-button {
+        i:nth-of-type(1) {
+          opacity: 0;
+        }
+
+        i:nth-of-type(2) {
+          opacity: 1;
+        }
+      }
+
+      a {
+        text-align: center;
+        white-space: nowrap;
+
+        @include media-down(md) {
+          @include font(h4);
+        }
+
+        &:not(:last-of-type) {
+          margin-right: spacing(8);
+
+          @include media-down(md) {
+            margin-bottom: spacing(4);
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    .header-menu-button {
+      $size: 32px;
+
+      width: $size;
+      height: $size;
+      display: none;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      right: spacing($header-padding-small);
+      font-size: 1em;
+      z-index: 110;
+
+      @include media-down(md) {
+        display: flex;
+      }
+
+      i {
+        position: absolute;
+        transition-property: opacity;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+
+        &:nth-of-type(1) {
+          opacity: 1;
+        }
+
+        &:nth-of-type(2) {
+          opacity: 0;
+        }
       }
     }
   }
@@ -57,6 +151,14 @@ header.header {
     justify-content: space-between;
     grid-column-gap: spacing(20);
     flex-grow: 1;
+
+    @include media-down(md) {
+      grid-template:
+        "image" auto
+        "info" auto
+        "specs" auto / 1fr;
+      grid-row-gap: spacing(8);
+    }
 
     .header-information {
       grid-area: info;
@@ -77,6 +179,7 @@ header.header {
       display: flex;
       position: relative;
       justify-content: center;
+      grid-area: image;
 
       figure {
         @include aspect-ratio(math.div(16, 9), (
@@ -140,36 +243,58 @@ header.header {
         background-position: right;
         background-size: 1px 12px;
         background-repeat: repeat-y;
+
+        @include media-down(md) {
+          display: none;
+        }
       }
     }
 
     .header-specs-block {
       display: flex;
       align-items: flex-end;
+      grid-area: specs;
 
       ul {
         li {
-          display: flex;
-          flex-direction: column;
+          display: grid;
+          grid-template: "icon" auto "title" auto "text" / 1fr;
+          align-items: center;
+
+          @include media-down(md) {
+            grid-template: "icon title" auto / auto 1fr;
+            grid-gap: spacing(2);
+          }
 
           &:not(:last-of-type) {
             margin-bottom: spacing(8);
+
+            @include media-down(md) {
+              margin-bottom: spacing(4);
+            }
           }
 
           .icon {
             $size: spacing(8);
 
+            grid-area: icon;
             width: $size;
             height: $size;
             background: $text-primary-color;
           }
 
           h5 {
+            grid-area: title;
             font-weight: bold;
           }
 
           p {
+            grid-area: text;
             color: $text-secondary-color;
+
+            @include media-down(md) {
+              display: none;
+            }
           }
 
           &:nth-of-type(1) {

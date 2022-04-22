@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:color";
 @import "../lib/variables";
 @import "../lib/mixins";
 
@@ -14,6 +15,11 @@ section.contact {
   padding-top: spacing($vertical-padding);
   padding-bottom: spacing($vertical-padding);
 
+  @include media-down(md) {
+    padding-left: spacing($mobile-horizontal-spacing);
+    padding-right: spacing($mobile-horizontal-spacing);
+  }
+
   &::before {
     content: "";
     width: 1px;
@@ -25,6 +31,10 @@ section.contact {
     background-position: left;
     background-size: 1px 12px;
     background-repeat: repeat-y;
+
+    @include media-down(md) {
+      left: #{calc(spacing($mobile-horizontal-spacing) / 2)};
+    }
   }
 
   &::after {
@@ -38,6 +48,10 @@ section.contact {
     background-position: left;
     background-size: 1px 12px;
     background-repeat: repeat-y;
+
+    @include media-down(md) {
+      right: #{calc(spacing($mobile-horizontal-spacing) / 2)};
+    }
   }
 
   .contact-title {
@@ -47,6 +61,10 @@ section.contact {
     padding: spacing(2) 0;
     margin-bottom: spacing(16);
     font-weight: bold;
+
+    @include media-down(md) {
+      margin-bottom: spacing(8);
+    }
 
     &::before {
       content: "";
@@ -59,6 +77,11 @@ section.contact {
       background-position: top;
       background-size: 12px 1px;
       background-repeat: repeat-x;
+
+      @include media-down(md) {
+        width: #{calc(100% + spacing($mobile-horizontal-spacing))};
+        left: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+      }
     }
 
     &::after {
@@ -72,6 +95,11 @@ section.contact {
       background-position: left;
       background-size: 1px 12px;
       background-repeat: repeat-y;
+
+      @include media-down(md) {
+        height: #{calc(100% + spacing(8))};
+        right: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+      }
     }
   }
 
@@ -82,6 +110,11 @@ section.contact {
 
     grid-template: "image form" auto / 1fr 1fr;
     grid-column-gap: spacing(4);
+
+    @include media-down(md) {
+      grid-template: "image" auto "form" auto / 1fr;
+      grid-row-gap: spacing(4);
+    }
 
     &::after {
       content: "";
@@ -94,6 +127,10 @@ section.contact {
       background-position: left;
       background-size: 1px 12px;
       background-repeat: repeat-y;
+
+      @include media-down(md) {
+        right: -#{calc(spacing($mobile-horizontal-spacing) / 2)};
+      }
     }
 
     .contact-image-container {
@@ -119,9 +156,14 @@ section.contact {
       grid-template:
         "name email" auto
         "message message" auto
-        "submit submit" 1fr / 1fr 1fr;
+        "submit submit" 1fr
+        "info info" auto / 1fr 1fr;
       align-content: flex-start;
       grid-gap: spacing(2);
+
+      @include media-down(md) {
+        grid-template: "name" auto "email" auto "message" auto "submit" auto / 1fr;
+      }
 
       .contact-form__field {
         @include container;
@@ -140,6 +182,20 @@ section.contact {
           grid-area: message;
         }
 
+        &.disabled {
+          user-select: none;
+
+          label {
+            color: color.adjust($text-secondary-color, $lightness: 10%);
+          }
+
+          input:disabled,
+          textarea:disabled {
+            border-color: color.adjust($text-secondary-color, $lightness: 20%);
+            color: color.adjust($text-secondary-color, $lightness: 10%);
+          }
+        }
+
         label {
           @include font(subtitle, (line-height));
 
@@ -151,6 +207,7 @@ section.contact {
           transition-property: top, left;
           transition-duration: 0.1s;
           transition-timing-function: ease-in-out;
+          user-select: none;
         }
 
         input,
@@ -210,6 +267,10 @@ section.contact {
           &:-webkit-autofill {
             -webkit-text-fill-color: $text-primary-color;
             box-shadow: 0 0 0 1000px $section-background inset;
+
+            &:disabled {
+              -webkit-text-fill-color: color.adjust($text-secondary-color, $lightness: 10%);
+            }
           }
         }
       }
@@ -235,15 +296,45 @@ section.contact {
         transition-duration: 0.15s;
         transition-timing-function: ease-in-out;
 
-        i {
-          margin-right: spacing(2);
-          font-size: 1em;
+        &:disabled {
+          border-color: color.adjust($text-secondary-color, $lightness: 20%);
+          color: color.adjust($text-secondary-color, $lightness: 20%);
+          cursor: default;
+
+          &:hover {
+            border-color: color.adjust($text-secondary-color, $lightness: 20%);
+            color: color.adjust($text-secondary-color, $lightness: 20%);
+            background: transparent;
+          }
         }
 
         &:hover {
           background: rgba(palette(primary, darker), 0.32);
           border-color: palette(primary, darker);
           color: palette(success, darker);
+        }
+
+        i {
+          margin-right: spacing(2);
+          font-size: 1em;
+        }
+      }
+
+      .contact-form__error {
+        @include container;
+        @include font(subtitle);
+
+        grid-area: info;
+        color: palette(danger, darker);
+        visibility: hidden;
+        opacity: 0;
+        transition-property: visibility, opacity;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+
+        &.visible {
+          visibility: visible;
+          opacity: 1;
         }
       }
     }
