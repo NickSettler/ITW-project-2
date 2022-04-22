@@ -6,7 +6,7 @@ const mode = process.env.PROD ? "production" : "development";
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
     },
     mode: mode,
