@@ -46,7 +46,7 @@ section.contact {
     height: spacing($vertical-padding);
     position: absolute;
     bottom: 0;
-    right: - spacing(24);
+    right: #{calc((100vw - #{$container-width}) / 2 - spacing(24))};
     background-image: linear-gradient($text-secondary-color 50%, transparent 0);
     background-position: left;
     background-size: 1px 12px;
