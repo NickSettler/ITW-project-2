@@ -1,8 +1,6 @@
 @use "sass:map";
 
-/*
-  Sizes
-*/
+///Sizes
 $min-viewport-width: 320px;
 $max-viewport-width: 1680px;
 $container-width: 1200px;
@@ -17,9 +15,7 @@ $widths: (
 $base-spacing-unit: 4px;
 $mobile-horizontal-spacing: 8;
 
-/*
-  Colors
-*/
+///Colors
 $dark-primary-text: rgb(0 0 0 / 87%);
 $dark-disabled-text: rgb(0 0 0 / 38%);
 $light-primary-text: white;
@@ -150,9 +146,7 @@ $colors: (
   )
 );
 
-/*
-  Typography
-*/
+///Typography
 $font-family-primary: "Lato", sans-serif;
 $typography: (
   h1: (
